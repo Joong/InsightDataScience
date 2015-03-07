@@ -23,14 +23,11 @@ public class RunningMedian {
 
         try {
             PrintWriter writer = new PrintWriter(output);
+            List<Integer> counter = new ArrayList<Integer>();
             for (String filename : listAndOrderFiles(path)) {
-                List<Integer> counter = new ArrayList<Integer>();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
                         path + File.separator + filename)));
                 String line;
-                if (!wordcounts.isEmpty()) {
-                    counter = wordcounts;
-                }
                 while ((line = reader.readLine()) != null) {
                     if (line.isEmpty()) {
                         counter.add(0);
@@ -40,7 +37,6 @@ public class RunningMedian {
                     Collections.sort(counter);
                     writer.println(median(counter));
                 }
-                wordcounts = counter;
             }
             writer.close();
         } catch (IOException e) {
